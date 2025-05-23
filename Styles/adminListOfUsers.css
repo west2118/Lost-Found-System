@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: #f5f5f5;
+}
+
+/* Main Content Styles */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+}
+
+.reports-table-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Card */
+.custom-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.custom-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  color: white;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+}
+
+.custom-card-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.custom-card-header button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-card-header button:hover {
+  background-color: #45a049;
+}
+
+/* Table */
+.custom-card-body {
+  padding: 1.5rem;
+}
+
+.custom-table-responsive {
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.custom-table td {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.user-avatar .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+/* Role Badge */
+.role-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.role-badge.admin {
+  background-color: #e3f2fd;
+  color: #1e88e5;
+}
+
+/* Actions */
+.actions-header {
+  text-align: center;
+}
+
+.actions .btn-edit,
+.actions .btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 36px;
+  height: 36px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions .btn-edit {
+  background-color: #e3f2fd;
+  color: #1e88e5;
+}
+
+.actions .btn-edit:hover {
+  background-color: #bbdefb;
+  transform: scale(1.1);
+}
+
+.actions .btn-delete {
+  background-color: #ffebee;
+  color: #e53935;
+}
+
+.actions .btn-delete:hover {
+  background-color: #ffcdd2;
+  transform: scale(1.1);
+}
+
+/* Optional: remove default button styles */
+.actions button {
+  background: none;
+  border: none;
+  padding: 0;
+}

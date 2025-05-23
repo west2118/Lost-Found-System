@@ -1,0 +1,142 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background-color: #f4f6f8;
+}
+
+h1,
+h2 {
+  color: #2c3e50;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.report-card,
+.item-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.report-card:hover,
+.item-card:hover {
+  transform: translateY(-5px);
+}
+
+.report-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #e74c3c;
+}
+
+.item-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin: 0.25rem 0;
+}
+
+.btn-confirm {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-confirm:hover {
+  background-color: #219150;
+}
+
+.btn-back {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #2980b9;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.btn-back:hover {
+  background-color: #1f6390;
+}
+
+.match-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: #eee;
+}
+
+.item-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.no-match-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #aaa;
+  background-color: #fefefe;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.no-match-title {
+  font-size: 1.5em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.no-match-text {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.no-match-btn {
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+.no-match-btn:hover {
+  background-color: #2563eb;
+}
