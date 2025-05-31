@@ -41,10 +41,10 @@ $item = new Item();
                                     <select id="itemCategory" name="itemCategory" required>
                                         <option value="">Select Category</option>
                                         <option value="electronics" <?php if ($row['itemCategory'] == 'electronics') echo 'selected'; ?>>Electronics</option>
-                                        <option value="documents" <?php if ($row['itemCategory'] == 'documents') echo 'selected'; ?>>Documents</option>
-                                        <option value="personal" <?php if ($row['itemCategory'] == 'personal') echo 'selected'; ?>>Personal Items</option>
-                                        <option value="clothing" <?php if ($row['itemCategory'] == 'clothing') echo 'selected'; ?>>Clothing</option>
-                                        <option value="accessories" <?php if ($row['itemCategory'] == 'accessories') echo 'selected'; ?>>Accessories</option>
+                                        <option value="wallet" <?php if ($row['itemCategory'] == 'documents') echo 'selected'; ?>>Documents</option>
+                                        <option value="bag" <?php if ($row['itemCategory'] == 'personal') echo 'selected'; ?>>Personal Items</option>
+                                        <option value="keys" <?php if ($row['itemCategory'] == 'clothing') echo 'selected'; ?>>Clothing</option>
+                                        <option value="jewelry" <?php if ($row['itemCategory'] == 'accessories') echo 'selected'; ?>>Accessories</option>
                                         <option value="other" <?php if ($row['itemCategory'] == 'other') echo 'selected'; ?>>Other</option>
                                     </select>
                                 </div>

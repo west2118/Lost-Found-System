@@ -44,7 +44,7 @@
                         <div class="d-grid mb-4">
                             <button type="submit" name="login" class="btn btn-login"> Login
                             </button>
-                            <a name="login" class="btn btn-login" onclick="window.location.href='/lost&found-system/'"> Cancel
+                            <a class="btn btn-cancel" onclick="window.location.href='/lost&found-system/'"> Cancel
                             </a>
                         </div>
                     </form>
@@ -56,34 +56,6 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        // Create floating stars
-        document.addEventListener('DOMContentLoaded', function() {
-            const starsContainer = document.getElementById('stars-container');
-            const starCount = 50;
-
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-
-                // Random properties
-                const size = Math.random() * 3 + 1;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const duration = Math.random() * 5 + 3;
-                const delay = Math.random() * 5;
-
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${posX}%`;
-                star.style.top = `${posY}%`;
-                star.style.setProperty('--duration', `${duration}s`);
-                star.style.animationDelay = `${delay}s`;
-
-                starsContainer.appendChild(star);
-            }
-        });
-    </script>
 </body>
 
 </html>

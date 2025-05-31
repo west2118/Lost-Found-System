@@ -110,16 +110,15 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
                     <div class="form-group">
                         <label for="itemPhoto">Upload Photo (Optional)</label>
                         <input
-                            type="url"
+                            type="text"
                             id="itemPhoto"
                             name="itemPhoto"
                             class="form-control"
-                            placeholder="https://example.com/image.jpg"
-                            pattern="https?://.*" />
+                            placeholder="https://example.com/image.jpg" />
                     </div>
 
                     <div class="form-footer">
-                        <a href="../View/Home.php" class="btn btn-secondary" type="button">Cancel</a>
+                        <a href="/lost&found-system/" class="btn btn-secondary" type="button">Cancel</a>
                         <button type="button" class="btn" id="nextBtn" onclick="showStep(2)">Next: Contact Info</button>
                     </div>
                 </div>

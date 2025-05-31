@@ -4,12 +4,12 @@ include "../Model/item.php";
 $item = new Item();
 
 // Pagination setup
-$limit = 9; // Number of items per page
+$limit = 10; // Number of items per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
 $totalItems = $item->getItemCount();
-$totalPages = ceil($totalItems / $limit);
+$totalPages = max(1, ceil($totalItems / $limit));
 
 if ($page < 1) {
     header("Location: ?page=1");
@@ -62,37 +62,36 @@ $items = $item->getAllItemsPaginated($limit, $offset);
 
         <div class="items-container">
             <div class="items-grid">
-                <?php if (empty($items)): ?>
-                    <p class="empty-message" style="text-align: center;">No items found.</p>
-                <?php else: ?>
-                    <?php foreach ($items as $item): ?>
-                        <div class="item-card" data-category="<?= $item['itemCategory']; ?>">
-                            <div class="item-image">
-                                <img src="<?= $item['itemImage'] ?>" alt="Item Image">
-                                <span class="item-status found"><?= $item['status'] ?></span>
+                <?php foreach ($items as $item) {
+                ?>
+                    <div class="item-card" data-category="<?= $item['itemCategory']; ?>">
+                        <div class="item-image">
+                            <img src="<?= $item['itemImage'] ?>" alt="Item Image">
+                            <span class="item-status found"><?= $item['status'] ?></span>
+                        </div>
+                        <div class="item-details">
+                            <div class="title-id">
+                                <h3 class="item-name"><?= $item['itemName'] ?></h3>
+                                <p>Item ID: <strong>#<?= $item['item_id'] ?></strong></p>
                             </div>
-                            <div class="item-details">
-                                <div class="title-id">
-                                    <h3><?= $item['itemName'] ?></h3>
-                                    <p>Item ID: <strong>#<?= $item['item_id'] ?></strong></p>
-                                </div>
-                                <div class="item-meta">
-                                    <span><?= $item['dateFound'] ?></span>
-                                    <span><?= $item['location'] ?></span>
-                                </div>
-                                <p class="item-desc"><?= $item['description'] ?></p>
-                                <div class="item-actions">
-                                    <a href="AdminAddItem.php?edit=<?= $item['item_id'] ?>" class="btn-edit"><i class="fa fa-edit"></i></a>
-                                    <button class="btn-delete" data-id="<?= $item['item_id']; ?>"><i class="fa fa-trash"></i></button>
-                                </div>
+                            <div class="item-meta">
+                                <span><?= $item['dateFound'] ?></span>
+                                <span><?= $item['location'] ?></span>
+                            </div>
+                            <p class="item-desc"><?= $item['description'] ?></p>
+                            <div class="item-actions">
+                                <a href="AdminAddItem.php?edit=<?= $item['item_id'] ?>" class="btn-edit"><i class="fa fa-edit"></i></a>
+                                <?php if ($item['status'] === 'pending'): ?>
+                                    <form action="../Controllers/action_item.php" method="POST">
+                                        <input type="text" name="item_id" value="<?php echo $item['item_id'] ?>" hidden>
+                                        <button class="btn-donate" type="submit" name="btn-donate">Mark as Donated</button>
+                                    </form>
+                                <?php endif; ?>
+                                <button class=" btn-delete" data-id="<?= $item['item_id']; ?>"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
-
-            <div class="no-results" style="display: none; text-align: center;">
-                <h1>No items found.</h1>
+                    </div>
+                <?php } ?>
             </div>
 
             <!-- Pagination Controls -->

@@ -2,10 +2,28 @@
   --space-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   --neon-blue: #00f5ff;
   --neon-pink: #ff00ff;
+
+  --primary-color: #4a6fa5;
+  --secondary-color: #ff9a3c;
+  --accent-color: #ff6b6b;
+  --light-color: #f8f9fa;
+  --dark-color: #333;
+  --form-bg: #ffffff;
+
+  /* Gradient variations */
+  --primary-gradient: linear-gradient(135deg, var(--primary-color), #5a86c1);
+  --secondary-gradient: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    #ffae5d
+  );
+  --accent-gradient: linear-gradient(135deg, var(--accent-color), #ff8a8a);
+  --light-gradient: linear-gradient(to bottom, var(--light-color), #ffffff);
+  --dark-gradient: linear-gradient(to right, var(--dark-color), #444);
 }
 
 body {
-  background: var(--space-gradient);
+  background: var(--primary-color);
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
@@ -69,10 +87,8 @@ body {
   color: white;
 }
 
-.btn-login {
-  background: transparent;
-  border: 2px solid var(--neon-blue);
-  color: var(--neon-blue);
+.btn-login,
+.btn-cancel {
   border-radius: 10px;
   padding: 10px 30px;
   font-weight: 600;
@@ -82,9 +98,27 @@ body {
   overflow: hidden;
 }
 
+.btn-login {
+  background: var(--neon-blue);
+  color: var(#0f0c29);
+}
+
+.btn-cancel {
+  border: 2px solid var(--neon-blue);
+  color: white;
+  margin-top: 10px;
+}
+
 .btn-login:hover {
   background: var(--neon-blue);
   color: #0f0c29;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.btn-cancel:hover {
+  border: 2px solid var(--neon-blue);
+  color: white;
   box-shadow: 0 0 20px rgba(0, 245, 255, 0.7);
   transform: translateY(-2px);
 }
@@ -159,7 +193,7 @@ body {
 .brand-logo {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+  background: linear-gradient(90deg, var(--neon-blue));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

@@ -49,11 +49,6 @@ $matches = $_SESSION['matches'] ?? [];
                     <p><strong>Location:</strong> <?php echo $item['location'] ?></p>
                     <p><strong>Description:</strong> <?php echo $item['description'] ?></p>
                 </div>
-                <!-- <form action="../Controllers/action_report.php" method="POST">
-                    <input type="hidden" name="report_id" value="<?php echo $reportLost['report_id'] ?>">
-                    <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?>">
-                    <button type="submit" name="confirm_match" class="btn-confirm">Confirm Match</button>
-                </form> -->
                 <div>
                     <button class="btn-confirm"
                         data-report-id="<?php echo $reportLost['report_id'] ?>"

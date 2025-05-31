@@ -6,7 +6,6 @@
   padding: 0;
   transition: all 0.3s;
   position: fixed;
-
   display: flex;
   flex-direction: column;
 }
@@ -18,11 +17,15 @@
 
 .sidebar-header h3 {
   color: #fff;
+  padding: 0;
+  margin: 0;
   font-size: 1.3rem;
 }
 
 .sidebar-header p {
   color: #b3b3b3;
+  padding: 0;
+  margin: 0;
   font-size: 0.8rem;
 }
 

@@ -20,7 +20,7 @@
             <input type="hidden" name="ref_number" id="modalRefNum">
             <input type="hidden" name="email" id="modalEmail">
             <button type="button" class="btn btn-cancel cancelBtn">Cancel</button>
-            <button type="submit" class="btn btn-remove" name="confirm_match">Confirm</button>
+            <button type="submit" class="btn btn-confirm-match" name="confirm_match">Confirm</button>
         </form>
     </div>
 </div>
@@ -30,10 +30,10 @@
     function openModalForMatch(data) {
         document.getElementById('modalTitle').textContent = 'Found Item';
         document.getElementById('modalBodyText').innerHTML = `
-            <p>This item has been successfully matched. Please advise the owner to claim it at the <strong>OSA Office</strong>.</p>
-            <p>Make sure to note the reference number and item details for verification.</p>
-            <p><strong>REF NUM:</strong> <span id="displayRefNum">${data.refNum}</span></p>
-        `;
+                <p>This item has been successfully matched. Please advise the owner to claim it at the <strong>OSA Office</strong>.</p>
+                <p>Make sure to note the reference number and item details for verification.</p>
+                <p><strong>REF NUM:</strong> <span id="displayRefNum">${data.refNum}</span></p>
+                `;
         fillHiddenInputs(data);
         showModal();
     }
@@ -41,10 +41,10 @@
     function openModalForNotify(data) {
         document.getElementById('modalTitle').textContent = 'Notify User';
         document.getElementById('modalBodyText').innerHTML = `
-            <p>We couldn't find any matching items for this report right now.</p>
-            <p>Click Confirm below to notify the reporter or follow up with updated details.</p>
-            <p><strong>Email:</strong> ${data.email}</span></p>
-        `;
+                <p>We couldn't find any matching items for this report right now.</p>
+                <p>Click Confirm below to notify the reporter or follow up with updated details.</p>
+                <p><strong>Email:</strong> ${data.email}</span></p>
+                `;
         // For notify, clear item_id and ref_number
         fillHiddenInputs({
             reportId: data.reportId,

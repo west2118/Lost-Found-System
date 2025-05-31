@@ -23,13 +23,13 @@ $report = new Report();
         <div class="reports-table-container">
             <div class="custom-card">
                 <div class="custom-card-header">
-                    <h4>📋 List of Reports</h4>
+                    <h4><i class="fas fa-clipboard-list"></i> List of Reports</h4>
                     <div class="search-filter">
                         <select class="filter-select">
                             <option>All Status</option>
                             <option>Pending</option>
-                            <option>Verified</option>
-                            <option>No Match</option>
+                            <option>Matched</option>
+                            <option>No matched</option>
                             <option>Returned</option>
                         </select>
                     </div>
@@ -39,24 +39,22 @@ $report = new Report();
                         <table class="custom-table" id="myTable">
                             <thead>
                                 <tr>
-                                    <th>Report ID</th>
-                                    <th>Item Name</th>
-                                    <th>Category</th>
-                                    <th>Description</th>
-                                    <th>Date Lost</th>
-                                    <th>Matched ID Item</th>
-                                    <th>Status</th>
-                                    <th>Reported By</th>
-                                    <th>Actions</th>
+                                    <th><i class="fas fa-hashtag"></i> Report ID</th>
+                                    <th><i class="fas fa-cube"></i> Item Name</th>
+                                    <th><i class="fas fa-tags"></i> Category</th>
+                                    <th><i class="fas fa-align-left"></i> Description</th>
+                                    <th><i class="far fa-calendar-alt"></i> Date Lost</th>
+                                    <th><i class="fas fa-link"></i> Matched ID Item</th>
+                                    <th><i class="fas fa-info-circle"></i> Status</th>
+                                    <th><i class="fas fa-user"></i> Reported By</th>
+                                    <th><i class="fas fa-cog"></i> Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $reports = $report->getAllReports();
 
-                                if (empty($reports)) {
-                                    echo '<tr><td colspan="9" style="text-align:center; padding: 20px;">No reports found.</td></tr>';
-                                } else {
+                                if ($reports) {
                                     foreach ($reports as $row) {
                                 ?>
                                         <tr>
@@ -73,36 +71,42 @@ $report = new Report();
                                             <td>
                                                 <?php
                                                 if ($row['status'] === "pending") {
-                                                    echo 'Pending';
-                                                } else if ($row['status'] === "no match") {
-                                                    echo "None";
-                                                } else if ($row['status'] === "verified" || $row['status'] === "returned") {
+                                                    echo '<span class="badge pending-badge">Pending</span>';
+                                                } else if ($row['status'] === "no matched") {
+                                                    echo '<span class="badge no-matched-badge">None</span>';
+                                                } else if ($row['status'] === "matched" || $row['status'] === "returned") {
                                                     echo "Item-ID-" . $row['matched_item_id'];
                                                 }
                                                 ?>
                                             </td>
-                                            <td class="status" data-status="<?php echo strtolower($row['status']); ?>">
-                                                <?php echo $row['status']; ?>
+                                            <td>
+                                                <span class="status" data-status="<?php echo strtolower($row['status']); ?>">
+                                                    <?php echo $row['status']; ?>
+                                                </span>
                                             </td>
                                             <td class="reportedBy"><?php echo $row['email']; ?></td>
-                                            <td style="display: flex; gap: 8px; align-items: center;">
+                                            <td>
                                                 <button class="btn-delete" data-id="<?php echo $row['report_id']; ?>">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="fas fa-trash"></i> Delete
                                                 </button>
                                                 <?php
                                                 if ($row['status'] === "pending") {
                                                     echo '
-                                                <form method="POST" action="../Controllers/action_report.php" style="margin: 0;">
-                                                    <input type="hidden" name="report_id" value="' . $row['report_id'] . '">
-                                                    <button type="submit" class="btn-match" name="find_match">Find Match</button>
-                                                </form>';
-                                                } else if ($row['status'] === "verified") {
+                                                    <form method="POST" action="../Controllers/action_report.php" style="margin: 0;">
+                                                        <input type="hidden" name="report_id" value="' . $row['report_id'] . '">
+                                                        <button type="submit" class="btn-match" name="find_match">
+                                                            <i class="fas fa-search"></i> Find Match
+                                                        </button>
+                                                    </form>';
+                                                } else if ($row['status'] === "matched") {
                                                     echo '
-                                                <form method="POST" action="../Controllers/action_report.php" style="margin: 0;">
-                                                    <input type="hidden" name="report_id" value="' . $row['report_id'] . '">
-                                                    <input type="hidden" name="item_id" value="' . $row['matched_item_id'] . '">
-                                                    <button type="submit" class="btn-match" name="mark_returned">Mark As Returned</button>
-                                                </form>';
+                                                    <form method="POST" action="../Controllers/action_report.php" style="margin: 0;">
+                                                        <input type="hidden" name="report_id" value="' . $row['report_id'] . '">
+                                                        <input type="hidden" name="item_id" value="' . $row['matched_item_id'] . '">
+                                                        <button type="submit" class="btn-match" name="mark_returned">
+                                                            <i class="fas fa-check-circle"></i> Mark Returned
+                                                        </button>
+                                                    </form>';
                                                 }
                                                 ?>
                                             </td>
@@ -112,9 +116,6 @@ $report = new Report();
                                 }
                                 ?>
                             </tbody>
-                            <tr id="noDataRow" style="display: none;">
-                                <td colspan="9" style="text-align: center; padding: 20px; color: #888;">No reports found for the selected status.</td>
-                            </tr>
                         </table>
                     </div>
                 </div>

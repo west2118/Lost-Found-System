@@ -1,3 +1,14 @@
+:root {
+  --primary: #6c5ce7;
+  --secondary: #a29bfe;
+  --pending: #fdcb6e;
+  --matched: #00b894;
+  --no-matched: #ff7675;
+  --returned: #74b9ff;
+  --dark: #2d3436;
+  --light: #f5f6fa;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,185 +28,204 @@ body {
   width: calc(100% - 250px);
 }
 
-/* Add these styles to your existing CSS */
-.content-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.content-header h2 {
-  color: #2c3e50;
-}
-
-.filter-select {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: white;
-}
-
-/* Container Styling */
 .reports-table-container {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  overflow: hidden;
+  margin-top: 20px;
 }
 
-/* Card Styles */
 .custom-card {
   background: white;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .custom-card-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  padding: 18px 15px;
-  border-radius: 10px 10px 0 0;
 }
 
 .custom-card-header h4 {
   margin: 0;
+  font-size: 1.2rem;
   font-weight: 600;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-/* Table Styles */
+.search-filter {
+  position: relative;
+}
+
+.filter-select {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 30px;
+}
+
+.filter-select option {
+  background: rgba(0, 0, 0, 0.8); /* dark background for dropdown options */
+  color: white; /* white text in dropdown */
+}
+
+.search-filter::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+
+.custom-card-body {
+  padding: 20px;
+}
+
 .custom-table-responsive {
   overflow-x: auto;
-  padding: 0 15px 15px;
+  padding: 0;
 }
 
 .custom-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .custom-table th {
   background-color: #f8f9fa;
-  color: #495057;
-  font-weight: 600;
-  text-align: left;
+  color: var(--dark);
+  font-weight: 500;
   padding: 15px;
+  text-align: left;
   position: sticky;
   top: 0;
-  z-index: 10;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid #eee;
 }
 
 .custom-table td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #e9ecef;
-  color: #495057;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  color: var(--dark);
+  font-weight: 400;
   vertical-align: middle;
 }
 
-.custom-table tr:hover {
-  background-color: #f8f9fa;
+.custom-table tr:hover td {
+  background-color: rgba(108, 92, 231, 0.05);
 }
 
-.custom-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* Status Badges */
+/* Shared Badge Styles */
 .status {
-  width: fit-content;
-  font-weight: 500;
-  text-transform: capitalize;
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.3s;
 }
 
+/* Individual Status Colors */
 .status[data-status="pending"] {
-  color: #ffc107;
+  background-color: rgba(253, 203, 110, 0.2);
+  color: #d63031;
 }
 
-.status[data-status="pending"]:before {
-  background-color: #ffc107;
+.status[data-status="matched"] {
+  background-color: rgba(0, 184, 148, 0.2);
+  color: #00b894;
 }
 
-.status[data-status="resolved"] {
-  color: #28a745;
+.status[data-status="no matched"] {
+  background-color: rgba(255, 118, 117, 0.2);
+  color: #ff7675;
 }
 
-.status[data-status="resolved"]:before {
-  background-color: #28a745;
+.status[data-status="returned"] {
+  background-color: rgba(116, 185, 255, 0.2);
+  color: #0984e3;
 }
 
-.status[data-status="rejected"] {
-  color: #dc3545;
-}
-
-.status[data-status="rejected"]:before {
-  background-color: #dc3545;
-}
-
-.btn-match {
-  background-color: #3498db;
+/* Action Buttons */
+.btn-delete {
+  background-color: #ff7675;
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 20px;
+  padding: 8px 15px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-match:hover {
-  background-color: #2980b9;
-}
-
-.edit {
-  background-color: #17a2b8;
-  color: white;
-  border: 1px solid #17a2b8;
-}
-
-.edit:hover {
-  background-color: #138496;
-  border-color: #117a8b;
-}
-
-.btn-delete {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-delete i {
-  pointer-events: none;
-}
-
-.btn-delete {
-  background: #e74c3c;
-  color: white;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
 }
 
 .btn-delete:hover {
-  background: #c0392b;
+  background-color: #e84393;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(255, 118, 117, 0.3);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 992px) {
+.btn-match {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+}
+
+.btn-match:hover {
+  background-color: #5649c0;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(108, 92, 231, 0.3);
+}
+
+/* No Data Row */
+#noDataRow td {
+  padding: 30px;
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .custom-card-header {
-    padding: 15px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .custom-table th,
   .custom-table td {
-    padding: 10px 12px;
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+
+  .btn-delete,
+  .btn-match {
+    padding: 6px 10px;
+    font-size: 0.7rem;
   }
 }

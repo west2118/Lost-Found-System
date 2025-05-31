@@ -1,5 +1,5 @@
 <?php
-require_once("database.php");
+require_once 'database.php';
 
 class Report
 {
@@ -62,8 +62,8 @@ class Report
     public function getMatchingItems($itemName, $description, $itemCategory)
     {
         $sql = "SELECT * FROM tbl_items 
-        WHERE itemName LIKE ? 
-          OR description LIKE ? 
+        WHERE (itemName LIKE ? 
+          OR description LIKE ?)
           AND itemCategory LIKE ? 
           AND status = 'pending'";
 
@@ -82,12 +82,12 @@ class Report
 
     public function confirmMatch($reportId, $itemId)
     {
-        $itemSql = "UPDATE tbl_items SET matched_report_id = ?, status = 'verified' WHERE item_id = ?";
+        $itemSql = "UPDATE tbl_items SET matched_report_id = ?, status = 'matched' WHERE item_id = ?";
         $stmt1 = $this->conn->prepare($itemSql);
         $stmt1->bind_param("ii", $reportId, $itemId);
         $stmt1->execute();
 
-        $reportSql = "UPDATE tbl_reports SET matched_item_id = ?, status = 'verified' WHERE report_id = ?";
+        $reportSql = "UPDATE tbl_reports SET matched_item_id = ?, status = 'matched' WHERE report_id = ?";
         $stmt2 = $this->conn->prepare($reportSql);
         $stmt2->bind_param("ii", $itemId, $reportId);
         $stmt2->execute();
@@ -97,7 +97,7 @@ class Report
 
     public function noMatchFound($reportId)
     {
-        $sql = "UPDATE tbl_reports SET status = 'no match' WHERE report_id = ?";
+        $sql = "UPDATE tbl_reports SET status = 'no matched' WHERE report_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $reportId);
         $stmt->execute();
@@ -118,5 +118,30 @@ class Report
         $stmt2->execute();
 
         return $stmt1->affected_rows > 0 && $stmt2->affected_rows > 0;
+    }
+
+    public function countPendingReports()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_reports WHERE status = 'pending'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
+
+    public function countAllReports()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_reports";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
+
+    public function getLast10Reports()
+    {
+        $sql = "SELECT * FROM tbl_reports ORDER BY report_id DESC LIMIT 10";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

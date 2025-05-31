@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+require_once 'database.php';
 
 class Item
 {
@@ -65,5 +65,33 @@ class Item
         $result = $this->conn->prepare($sql);
         $result->bind_param("i", $item_id);
         return $result->execute();
+    }
+
+    public function markAsDonated($itemId)
+    {
+        $itemSql = "UPDATE tbl_items SET status = 'donated' WHERE item_id = ?";
+        $stmt1 = $this->conn->prepare($itemSql);
+        $stmt1->bind_param("i", $itemId);
+        $stmt1->execute();
+
+        return $stmt1->affected_rows > 0;
+    }
+
+    public function countItems()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_items";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
+
+    public function countReturnedItems()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_items WHERE status = 'returned'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
     }
 }

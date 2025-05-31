@@ -38,6 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             header("Location: ../View/AdminListOfItems.php");
             exit();
         }
+    } else if (isset($_POST['btn-donate'])) {
+        $item_id = $_POST['item_id'];
+
+        $result = $item->markAsDonated($item_id);
+
+        if ($result) {
+            header("Location: ../View/AdminListOfItems.php");
+            exit();
+        }
     } else if (isset($_POST['confirm_delete'])) {
         $delete_id = $_POST['delete_id'];
 

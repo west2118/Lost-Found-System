@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
 }
 
 body {
@@ -50,20 +51,20 @@ body {
 }
 
 .custom-card-header button {
-  background-color: #4caf50;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 20px;
   font-size: 0.95rem;
-  border-radius: 6px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .custom-card-header button:hover {
-  background-color: #45a049;
+  background: rgba(255, 255, 255, 0.35); /* slightly more visible on hover */
+  color: #fff;
 }
-
 /* Table */
 .custom-card-body {
   padding: 1.5rem;
