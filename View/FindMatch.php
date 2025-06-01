@@ -1,6 +1,11 @@
 <?php
 
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../View/login.php');
+    exit();
+}
+
 require_once "../Model/report.php";
 
 $reportLost = $_SESSION['reportLost'] ?? null;

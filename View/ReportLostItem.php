@@ -44,6 +44,7 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
                         <p>Fill in the details below to help us identify your lost item</p>
                     </div>
 
+                    <div id="error-message" class="error-message" style="display: none;"></div>
                     <div class="form-group">
                         <label for="itemName">Item Name</label>
                         <input type="text" id="itemName" name="itemName" class="form-control" placeholder="e.g. iPhone 13, Black Wallet" required>
@@ -53,7 +54,7 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
                         <label>Item Category</label>
                         <div class="category-selector">
                             <div class="category-option">
-                                <input type="radio" id="electronics" name=itemCategory value="electronics" required>
+                                <input type="radio" id="electronics" name=itemCategory value="electronics">
                                 <label for="electronics">
                                     <span class="icon">📱</span>
                                     Electronics
@@ -110,7 +111,7 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
                     <div class="form-group">
                         <label for="itemPhoto">Upload Photo (Optional)</label>
                         <input
-                            type="text"
+                            type="url"
                             id="itemPhoto"
                             name="itemPhoto"
                             class="form-control"
@@ -119,7 +120,7 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
 
                     <div class="form-footer">
                         <a href="/lost&found-system/" class="btn btn-secondary" type="button">Cancel</a>
-                        <button type="button" class="btn" id="nextBtn" onclick="showStep(2)">Next: Contact Info</button>
+                        <button type="button" class="btn" id="nextBtn">Next: Contact Info</button>
                     </div>
                 </div>
 
@@ -132,16 +133,17 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
 
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" name="fullName" class="form-control" required>
+                        <input type="text" name="fullName" class="form-control" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="tel" name="contactNo" class="form-control" required>
+                        <input type="tel" name="contactNo" class="form-control" placeholder="Enter your phone number" required>
                     </div>
+
                     <div class="form-footer">
                         <button type="button" id="prevBtn" class="btn btn-secondary" onclick="showStep(1)">Back</button>
                         <button type="submit" id="nextBtn" name="submit" class="btn">Submit Report</button>
@@ -164,6 +166,34 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
     </div>
 
     <script>
+        function validateStep1() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemCategory = document.querySelector('input[name="itemCategory"]:checked');
+            const description = document.getElementById('description').value.trim();
+            const dateLost = document.getElementById('dateLost').value.trim();
+            const itemPhoto = document.getElementById('itemPhoto').value.trim();
+
+            let errorMsg = '';
+
+            if (itemPhoto && !/^https?:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(itemPhoto)) {
+                errorMsg = 'If provided, the photo URL must be a valid image link (ending in .jpg, .png, etc.)';
+            }
+
+            if (!itemName || !itemCategory || !description || !dateLost) {
+                errorMsg = 'Please Fill the blanks';
+            }
+
+            const errorContainer = document.getElementById('error-message');
+            if (errorMsg) {
+                errorContainer.textContent = errorMsg;
+                errorContainer.style.display = 'block';
+                return false;
+            } else {
+                errorContainer.style.display = 'none';
+                return true;
+            }
+        }
+
         function getStepFromUrl() {
             const params = new URLSearchParams(window.location.search);
             return parseInt(params.get('step')) || 1;
@@ -201,12 +231,19 @@ $ref_number = isset($_SESSION['ref_number']) ? $_SESSION['ref_number'] : "";
 
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
+                    if (currentStep === 1) {
+                        const isValid = validateStep1();
+                        if (!isValid) return; // Stop if validation fails
+                    }
+
                     if (currentStep < steps.length) {
                         currentStep++;
                         updateProgress(currentStep);
+                        showStep(currentStep); // Actually switch the view
                     }
                 });
             }
+
 
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {

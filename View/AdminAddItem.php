@@ -1,6 +1,6 @@
 <?php
 
-include "../Model/item.php";
+require_once "../Model/item.php";
 $item = new Item();
 
 ?>

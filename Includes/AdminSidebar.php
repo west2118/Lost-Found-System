@@ -6,9 +6,13 @@
 <?php
 
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../View/login.php');
+    exit();
+}
+
 require_once '../Model/user.php';
 $user = new User();
-
 $user_login = null;
 if (isset($_SESSION['user_id'])) {
     $user_login = $user->getUserById($_SESSION['user_id']);

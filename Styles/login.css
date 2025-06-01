@@ -23,7 +23,7 @@
 }
 
 body {
-  background: var(--primary-color);
+  background: radial-gradient(circle at top left, #e0f2fe 20%, #f0f9ff);
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
@@ -75,8 +75,7 @@ body {
 }
 
 .form-control::placeholder {
-  color: #6c757d;
-  /* Bootstrap's default is slightly different */
+  color: white;
   opacity: 1;
 }
 
