@@ -37,11 +37,21 @@ $user = new User();
                         <table class="custom-table" id="myTable">
                             <thead>
                                 <tr>
-                                    <th class="user-avatar">User</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Registered</th>
-                                    <th class="actions-header">Actions</th>
+                                    <th>
+                                        <i class="fa fa-user" aria-hidden="true"></i> User
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i> Email
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-user-tag" aria-hidden="true"></i> Role
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-calendar-alt" aria-hidden="true"></i> Registered
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-cogs" aria-hidden="true"></i> Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

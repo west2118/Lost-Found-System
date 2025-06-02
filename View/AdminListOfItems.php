@@ -43,15 +43,26 @@ $items = $item->getAllItemsPaginated($limit, $offset);
                 <div class="search-filter">
                     <div class="search-box">
                         <input type="text" placeholder="Search items...">
-                        <button><i class="fa fa-search"></i></button>
+                        <button type="button"><i class="fa fa-search"></i></button>
                     </div>
-                    <select class="filter-select">
+
+                    <select class="filter-select category-select">
                         <option>All Categories</option>
                         <option>Electronics</option>
-                        <option>Documents</option>
-                        <option>Personal Items</option>
-                        <option>Clothing</option>
-                        <option>Accessories</option>
+                        <option>Wallet</option>
+                        <option>Keys</option>
+                        <option>Bag</option>
+                        <option>Jewelry</option>
+                        <option>Other</option>
+                    </select>
+
+                    <select class="filter-select status-select">
+                        <option>All Status</option>
+                        <option>Pending</option>
+                        <option>Matched</option>
+                        <option>No matched</option>
+                        <option>Returned</option>
+                        <option>Donated</option>
                     </select>
                 </div>
                 <button class="btn-add-item" onclick="window.location.href='AdminAddItem.php'">
@@ -64,7 +75,8 @@ $items = $item->getAllItemsPaginated($limit, $offset);
             <div class="items-grid">
                 <?php foreach ($items as $item) {
                 ?>
-                    <div class="item-card" data-category="<?= $item['itemCategory']; ?>">
+                    <div class="item-card" data-category="<?= htmlspecialchars($item['itemCategory']); ?>"
+                        data-status="<?= htmlspecialchars($item['status']); ?>">
                         <div class="item-image">
                             <img src="<?= $item['itemImage'] ?>" alt="Item Image">
                             <span class="item-status found"><?= $item['status'] ?></span>
@@ -121,24 +133,28 @@ $items = $item->getAllItemsPaginated($limit, $offset);
 
     <script>
         const itemCards = document.querySelectorAll('.item-card');
-        const filterSelect = document.querySelector('.filter-select');
+        const categorySelect = document.querySelector('.category-select');
+        const statusSelect = document.querySelector('.status-select');
         const searchInput = document.querySelector('.search-box input');
         const noResults = document.querySelector('.no-results');
 
         function filterItems() {
-            const selectedCategory = filterSelect.value.toLowerCase();
+            const selectedCategory = categorySelect.value.toLowerCase();
+            const selectedStatus = statusSelect.value.toLowerCase();
             const searchTerm = searchInput.value.trim().toLowerCase();
             let visibleCount = 0;
 
             itemCards.forEach(card => {
                 const category = card.getAttribute('data-category').toLowerCase();
+                const status = card.getAttribute('data-status').toLowerCase();
                 const name = card.querySelector('h3').textContent.toLowerCase();
                 const description = card.querySelector('.item-desc').textContent.toLowerCase();
 
                 const matchesCategory = selectedCategory === 'all categories' || selectedCategory === category;
+                const matchesStatus = selectedStatus === 'all status' || selectedStatus === status;
                 const matchesSearch = name.includes(searchTerm) || description.includes(searchTerm);
 
-                if (matchesCategory && matchesSearch) {
+                if (matchesCategory && matchesStatus && matchesSearch) {
                     card.style.display = 'block';
                     visibleCount++;
                 } else {
@@ -149,8 +165,19 @@ $items = $item->getAllItemsPaginated($limit, $offset);
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        filterSelect.addEventListener('change', filterItems);
+        categorySelect.addEventListener('change', filterItems);
+        statusSelect.addEventListener('change', filterItems);
         searchInput.addEventListener('input', filterItems);
+
+        // Prevent button default behavior (if button is inside a form)
+        const searchButton = document.querySelector('.search-box button');
+        searchButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            filterItems();
+        });
+
+        // Initial filtering
+        filterItems();
 
         document.querySelectorAll('.btn-delete').forEach(btn => {
             btn.addEventListener('click', () => {

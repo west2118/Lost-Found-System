@@ -75,6 +75,19 @@
   background-color: #e0e0e0;
 }
 
+.btn-confirm-match {
+  background: linear-gradient(45deg, #4a90e2, #357abd);
+  color: white;
+}
+
+.btn-confirm-match:hover {
+  background: linear-gradient(45deg, #357abd, #2a5f9e);
+}
+.btn-confirm-match:disabled {
+  background: #a0bce6;
+  cursor: not-allowed;
+}
+
 .btn-remove {
   background-color: #d32f2f;
   color: white;

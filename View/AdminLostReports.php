@@ -84,7 +84,7 @@ $report = new Report();
                                                     <?php echo $row['status']; ?>
                                                 </span>
                                             </td>
-                                            <td class="reportedBy"><?php echo $row['email']; ?></td>
+                                            <td class="reportedBy"><?php echo $row['fullName']; ?> (<?php echo $row['email']; ?>)</td>
                                             <td>
                                                 <button class="btn-delete" data-id="<?php echo $row['report_id']; ?>">
                                                     <i class="fas fa-trash"></i> Delete
@@ -146,33 +146,19 @@ $report = new Report();
                 });
             });
 
-            // 🔍 Filtering logic
+            DataTable.ext.search.push(function(settings, data, dataIndex, rowData, counter) {
+                const selected = document.querySelector('.filter-select').value.toLowerCase();
+                if (selected === "all status") return true;
+
+                const row = table.row(dataIndex).node();
+                const status = row.querySelector('.status')?.dataset.status;
+
+                return status === selected;
+            });
+
+            // Trigger the custom filter on change
             document.querySelector('.filter-select').addEventListener('change', function() {
-                const selectedStatus = this.value.toLowerCase();
-                const rows = document.querySelectorAll('#myTable tbody tr');
-                let visibleCount = 0;
-
-                rows.forEach(row => {
-                    // Skip the "no data" row
-                    if (row.id === 'noDataRow') return;
-
-                    const status = row.querySelector('.status')?.dataset.status;
-
-                    if (selectedStatus === 'all status' || selectedStatus === status) {
-                        row.style.display = '';
-                        visibleCount++;
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-
-                // Show or hide the no data row
-                const noDataRow = document.getElementById('noDataRow');
-                if (visibleCount === 0) {
-                    noDataRow.style.display = '';
-                } else {
-                    noDataRow.style.display = 'none';
-                }
+                table.draw();
             });
         </script>
 </body>

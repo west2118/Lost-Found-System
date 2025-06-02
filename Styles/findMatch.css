@@ -64,6 +64,7 @@ h2 {
 
 .report-card {
   border-top: 5px solid var(--primary);
+  width: 400px;
   position: relative;
   overflow: hidden;
 }
@@ -214,6 +215,52 @@ h2 {
   background: #fdcb6e;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(253, 203, 110, 0.3);
+}
+
+.item-image-container {
+  margin: 20px 0;
+  max-width: 100%;
+}
+
+.image-wrapper {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.no-image-placeholder {
+  text-align: center;
+  color: #a0aec0;
+}
+
+.no-image-placeholder svg {
+  margin-bottom: 10px;
+}
+
+.no-image-placeholder p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.image-caption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #4a5568;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* ===== RESPONSIVE ===== */

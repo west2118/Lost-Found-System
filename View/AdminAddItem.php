@@ -41,10 +41,10 @@ $item = new Item();
                                     <select id="itemCategory" name="itemCategory" required>
                                         <option value="">Select Category</option>
                                         <option value="electronics" <?php if ($row['itemCategory'] == 'electronics') echo 'selected'; ?>>Electronics</option>
-                                        <option value="wallet" <?php if ($row['itemCategory'] == 'documents') echo 'selected'; ?>>Documents</option>
-                                        <option value="bag" <?php if ($row['itemCategory'] == 'personal') echo 'selected'; ?>>Personal Items</option>
-                                        <option value="keys" <?php if ($row['itemCategory'] == 'clothing') echo 'selected'; ?>>Clothing</option>
-                                        <option value="jewelry" <?php if ($row['itemCategory'] == 'accessories') echo 'selected'; ?>>Accessories</option>
+                                        <option value="wallet" <?php if ($row['itemCategory'] == 'wallet') echo 'selected'; ?>>Wallet</option>
+                                        <option value="keys" <?php if ($row['itemCategory'] == 'keys') echo 'selected'; ?>>Keys</option>
+                                        <option value="bag" <?php if ($row['itemCategory'] == 'bag') echo 'selected'; ?>>Bag</option>
+                                        <option value="jewelry" <?php if ($row['itemCategory'] == 'jewelry') echo 'selected'; ?>>Jewelry</option>
                                         <option value="other" <?php if ($row['itemCategory'] == 'other') echo 'selected'; ?>>Other</option>
                                     </select>
                                 </div>
@@ -124,10 +124,10 @@ $item = new Item();
                                 <select id="itemCategory" name="itemCategory" required>
                                     <option value="">Select Category</option>
                                     <option value="electronics">Electronics</option>
-                                    <option value="documents">Documents</option>
-                                    <option value="personal">Personal Items</option>
-                                    <option value="clothing">Clothing</option>
-                                    <option value="accessories">Accessories</option>
+                                    <option value="wallet">Wallet</option>
+                                    <option value="keys">Keys</option>
+                                    <option value="bag">Bag</option>
+                                    <option value="jewelry">Jewelry</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>

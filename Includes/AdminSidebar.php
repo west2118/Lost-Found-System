@@ -29,19 +29,19 @@ if (isset($_SESSION['user_id'])) {
     <div class="sidebar-menu">
         <div class="menu-category">Dashboard</div>
         <a href="../View/AdminDashboard.php" class="menu-item active">
-            <i class="fa fa-dashboard"></i>
+            <i class="fa fa-tachometer-alt" style="color: #4CAF50;"></i>
             <span>Dashboard</span>
         </a>
 
         <div class="menu-category">Reports</div>
         <a href="../View/AdminLostReports.php" class="menu-item">
-            <i class="fa fa-report"></i>
+            <i class="fa fa-file-alt" style="color: #2196F3;"></i>
             <span>Lost Reports</span>
         </a>
 
         <div class="menu-category">Item Management</div>
         <div class="menu-item" id="item-toggle">
-            <i class="fa fa-items"></i>
+            <i class="fa fa-box-open" style="color: #FF9800;"></i>
             <span>Lost Item Management</span>
         </div>
         <div class="submenu" id="item-submenu">
@@ -57,7 +57,7 @@ if (isset($_SESSION['user_id'])) {
 
         <div class="menu-category">User Management</div>
         <div class="menu-item" id="item-toggle2">
-            <i class="fa fa-items"></i>
+            <i class="fa fa-users-cog" style="color: #9C27B0;"></i>
             <span>User Management</span>
         </div>
         <div class="submenu" id="item-submenu2">
@@ -93,5 +93,30 @@ if (isset($_SESSION['user_id'])) {
     document.getElementById('item-toggle2').addEventListener('click', function() {
         this.classList.toggle('rotate');
         document.getElementById('item-submenu2').classList.toggle('show');
+    });
+
+    const currentPath = window.location.pathname;
+
+    // Select all links inside sidebar menu
+    const menuLinks = document.querySelectorAll('.sidebar-menu a.menu-item, .sidebar-menu a.submenu-item');
+
+    menuLinks.forEach(link => {
+        // Check if href ends with current page filename
+        if (link.getAttribute('href') === currentPath || link.getAttribute('href').endsWith(currentPath.split('/').pop())) {
+            // Remove active from all siblings
+            menuLinks.forEach(l => l.classList.remove('active'));
+            // Add active to the matched link
+            link.classList.add('active');
+
+            // If submenu item is active, also open/show its parent submenu and possibly parent menu-item
+            const parentSubmenu = link.closest('.submenu');
+            if (parentSubmenu) {
+                parentSubmenu.style.display = 'block'; // show submenu
+                const parentToggle = parentSubmenu.previousElementSibling; // the menu-item toggle
+                if (parentToggle) {
+                    parentToggle.classList.add('active'); // optionally highlight the toggle too
+                }
+            }
+        }
     });
 </script>

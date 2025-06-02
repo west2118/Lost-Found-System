@@ -29,6 +29,23 @@ $matches = $_SESSION['matches'] ?? [];
     <!-- Lost Report Section -->
     <div class="section report-card">
         <div class="report-title">Reported Lost Item: <?php echo $reportLost['itemName'] ?></div>
+        <div class="item-image-container">
+            <div class="image-wrapper">
+                <?php if (!empty($reportLost['itemPhoto'])): ?>
+                    <img src="<?php echo $reportLost['itemPhoto'] ?>" alt="Lost item photo" class="item-image">
+                <?php else: ?>
+                    <div class="no-image-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p>No image available</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <p class="image-caption">Item Photo</p>
+        </div>
         <p><strong>Report ID:</strong> <?php echo $reportLost['report_id'] ?></p>
         <p><strong>Category:</strong> <?php echo $reportLost['itemCategory'] ?></p>
         <p><strong>Description:</strong> <?php echo $reportLost['description'] ?></p>
